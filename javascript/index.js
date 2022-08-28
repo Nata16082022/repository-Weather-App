@@ -57,6 +57,7 @@ function weatherCity(response) {
     // temp
     let degree = document.querySelector("#degree");
     degree.innerHTML = Math.round(response.data.main.temp);
+    celsiusTemp = response.data.main.temp;
     // pressure
     let pressure = document.querySelector("#pressure");
     pressure.innerHTML = Math.round(response.data.main.pressure);
@@ -105,10 +106,35 @@ function geolocation() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
+// unit
+function fahrenheit(event) {
+  event.preventDefault();
+  let fahrenheitTemperature = Math.round((celsiusTemp * 9) / 5 + 32);
+  let degree = document.querySelector("#degree");
+  degree.innerHTML = fahrenheitTemperature;
+  celsiustLink.classList.remove("active");
+  fahrenheitLink.classList.add("active");
+}
+
+function celsius(event) {
+  event.preventDefault();
+  let degree = document.querySelector("#degree");
+  degree.innerHTML = Math.round(celsiusTemp);
+  celsiustLink.classList.add("active");
+  fahrenheitLink.classList.remove("active");
+}
+
+// main
 let buttonSearch = document.querySelector("#search");
 buttonSearch.addEventListener("submit", city);
 
 let buttonGeolocation = document.querySelector("#Geolocation");
 buttonGeolocation.addEventListener("click", geolocation);
 
-//let fahrenheitTemperature = Math.round((temperature * 9) / 5 + 32);
+let celsiusTemp = null;
+
+let fahrenheitLink = document.querySelector("#fahrenheit-link");
+fahrenheitLink.addEventListener("click", fahrenheit);
+
+let celsiustLink = document.querySelector("#celsius-link");
+celsiustLink.addEventListener("click", celsius);

@@ -104,3 +104,11 @@ form {
   border: 2px solid #026fc5;
   background-color: #d3f0f7;
 }
+
+.active {
+  color: #026fc5;
+  cursor: default;
+}
+.active:hover {
+  text-decoration: none;
+}
