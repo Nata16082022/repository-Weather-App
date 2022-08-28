@@ -1,7 +1,49 @@
 //weatherCity
 function weatherCity(response) {
   if (response.status === 200) {
-    //cityss
+    // date
+    let dataLastUpdated = response.data.dt * 1000;
+    let fullDays = [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ];
+
+    let months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+
+    let currentDate = new Date(dataLastUpdated);
+
+    let currentFullDay = document.querySelector("#full-day");
+    currentFullDay.innerHTML = `${fullDays[currentDate.getDay()]}`;
+
+    let currentFullDate = document.querySelector("#full-date");
+    currentFullDate.innerHTML = `${("0" + currentDate.getDate()).slice(-2)} ${
+      months[currentDate.getMonth()]
+    } ${currentDate.getFullYear()}`;
+
+    let currentFullTime = document.querySelector("#full-time");
+    currentFullTime.innerHTML = `${("0" + currentDate.getHours()).slice(-2)}:${(
+      "0" + currentDate.getMinutes()
+    ).slice(-2)}:${("0" + currentDate.getSeconds()).slice(-2)}`;
+
+    //city
     let h2 = document.querySelector("h2");
     h2.innerHTML = response.data.name.toUpperCase();
     // temp
@@ -55,49 +97,10 @@ function geolocation() {
   navigator.geolocation.getCurrentPosition(showPosition);
 }
 
-// LOCALTIME
-let fullDays = [
-  "Sunday",
-  "Monday",
-  "Tuesday",
-  "Wednesday",
-  "Thursday",
-  "Friday",
-  "Saturday",
-];
-
-let months = [
-  "January",
-  "February",
-  "March",
-  "April",
-  "May",
-  "June",
-  "July",
-  "August",
-  "September",
-  "October",
-  "November",
-  "December",
-];
-
-let currentDate = new Date();
-
-let currentFullDay = document.querySelector("#full-day");
-currentFullDay.innerHTML = `${fullDays[currentDate.getDay()]}`;
-
-let currentFullDate = document.querySelector("#full-date");
-currentFullDate.innerHTML = `${("0" + currentDate.getDate()).slice(-2)} ${
-  months[currentDate.getMonth()]
-} ${currentDate.getFullYear()}`;
-
-let currentFullTime = document.querySelector("#full-time");
-currentFullTime.innerHTML = `${("0" + currentDate.getHours()).slice(-2)}:${(
-  "0" + currentDate.getMinutes()
-).slice(-2)}:${("0" + currentDate.getSeconds()).slice(-2)}`;
-
 let buttonSearch = document.querySelector("#search");
 buttonSearch.addEventListener("submit", city);
 
 let buttonGeolocation = document.querySelector("#Geolocation");
 buttonGeolocation.addEventListener("click", geolocation);
+
+//let fahrenheitTemperature = Math.round((temperature * 9) / 5 + 32);
