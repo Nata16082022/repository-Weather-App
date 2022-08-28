@@ -138,3 +138,8 @@ fahrenheitLink.addEventListener("click", fahrenheit);
 
 let celsiustLink = document.querySelector("#celsius-link");
 celsiustLink.addEventListener("click", celsius);
+
+let apiKey = "e503772def8edfa5152e184c6e0d5a99";
+let unit = "metric";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=${unit}&appid=${apiKey}`;
+axios.get(apiUrl, { validateStatus: false }).then(weatherCity);
