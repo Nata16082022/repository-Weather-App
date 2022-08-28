@@ -31,7 +31,7 @@ p {
 img {
   display: block;
   margin: 10px auto 10px auto;
-  background: white;
+  background: #d3e7f7;
   border-radius: 10px;
   box-shadow: 2px 2px 15px 1px gray;
   width: 70%;
@@ -44,7 +44,7 @@ form {
 
 .button-geolocation {
   border-radius: 2px;
-  border: 1px solid #767676;
+  border: 1px solid hsl(41, 46%, 87%);
   width: 38px;
   height: 30px;
 }

@@ -43,6 +43,14 @@ function weatherCity(response) {
       "0" + currentDate.getMinutes()
     ).slice(-2)}:${("0" + currentDate.getSeconds()).slice(-2)}`;
 
+    // icon
+    let iconElement = document.querySelector("#icon");
+    iconElement.setAttribute(
+      "src",
+      `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+    );
+    iconElement.setAttribute("alt", response.data.weather[0].description);
+
     //city
     let h2 = document.querySelector("h2");
     h2.innerHTML = response.data.name.toUpperCase();
