@@ -34,7 +34,6 @@ img {
   background: #007bff;
   border-radius: 10px;
   box-shadow: 2px 2px 15px 1px gray;
-  width: 70%;
 }
 
 form {
@@ -75,9 +74,11 @@ form {
 .centr-text {
   text-align: center;
 }
+
 .left-text {
   text-align: left;
 }
+
 .right-text {
   text-align: right;
 }

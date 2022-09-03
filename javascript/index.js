@@ -124,6 +124,31 @@ function celsius(event) {
   fahrenheitLink.classList.remove("active");
 }
 
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let forecastHTML = `<div class="row">`;
+  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<div class="col-2">
+          <p class="centr-text">${day}</p>
+          <p class="centr-text-small">July 18</p>
+          <img src="images/sun_cloud.png" width: 35%;/>
+
+          <div class="row">
+            <div class="col-6 pr-2">
+              <p class="right-text">22°</p>
+            </div>
+            <div class="col-6 pl-2">
+              <p class="text-left">18°</p>
+            </div>
+          </div>
+        </div>`;
+  });
+  forecastHTML = forecastHTML + `</div>`;
+  forecastElement.innerHTML = forecastHTML;
+}
 // main
 let buttonSearch = document.querySelector("#search");
 buttonSearch.addEventListener("submit", city);
@@ -143,3 +168,4 @@ let apiKey = "e503772def8edfa5152e184c6e0d5a99";
 let unit = "metric";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=${unit}&appid=${apiKey}`;
 axios.get(apiUrl, { validateStatus: false }).then(weatherCity);
+displayForecast();
