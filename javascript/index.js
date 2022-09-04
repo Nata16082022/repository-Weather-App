@@ -125,6 +125,7 @@ function celsius(event) {
   fahrenheitLink.classList.remove("active");
 }
 
+// forecast
 function getForecast(coordinates) {
   //let apiKey = "4b7297e82ecb214c50b2cf7c07f2f3f4";
   let apiKey = "c95d60a1e3adbeb286133f1ebebc2579";
@@ -134,7 +135,6 @@ function getForecast(coordinates) {
 }
 
 function displayForecast(response) {
-  console.log(response);
   let forecastdays = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
@@ -211,5 +211,6 @@ celsiustLink.addEventListener("click", celsius);
 
 let apiKey = "372cf7f5c9fb1d5f2a2fd40eaffee0eb";
 let unit = "metric";
-let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=${unit}&appid=${apiKey}`;
+let cityDefault = "Paris";
+let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${cityDefault}&units=${unit}&appid=${apiKey}`;
 axios.get(apiUrl, { validateStatus: false }).then(weatherCity);
