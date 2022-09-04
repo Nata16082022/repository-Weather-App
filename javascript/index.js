@@ -126,39 +126,74 @@ function celsius(event) {
 }
 
 function getForecast(coordinates) {
-  console.log(coordinates);
-  let apiKey = "718711be868da73c54a132b5ddbcceb2";
+  //let apiKey = "4b7297e82ecb214c50b2cf7c07f2f3f4";
+  let apiKey = "c95d60a1e3adbeb286133f1ebebc2579";
   let unit = "metric";
-  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=${unit}&appid=4b7297e82ecb214c50b2cf7c07f2f3f4`;
-  https: axios.get(apiUrl, { validateStatus: false }).then(displayForecast);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=${unit}&appid=${apiKey}`;
+  axios.get(apiUrl, { validateStatus: false }).then(displayForecast);
 }
 
 function displayForecast(responce) {
-  //console.log(responce);
+  console.log(responce);
+  let forecastdays = responce.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
-  let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
-  days.forEach(function (day) {
-    forecastHTML =
-      forecastHTML +
-      `<div class="col-2">
-          <p class="centr-text">${day}</p>
-          <p class="centr-text-small">July 18</p>
-          <img src="images/sun_cloud.png" width: 35%;/>
+  forecastdays.forEach(function (forecastDay, index) {
+    if (index < 5) {
+      forecastHTML =
+        forecastHTML +
+        `<div class="col-2">
+          <p class="centr-text">${formatDay(forecastDay.dt)}</p>
+          <p class="centr-text-small">${formatDate(forecastDay.dt)}</p>
+          <img src="http://openweathermap.org/img/wn/${
+            forecastDay.weather[0].icon
+          }@2x.png" width: 30%;/>
 
           <div class="row">
             <div class="col-6 pr-2">
-              <p class="right-text">22°</p>
+              <p class="right-text">${Math.round(forecastDay.temp.max)}°</p>
             </div>
             <div class="col-6 pl-2">
-              <p class="text-left">18°</p>
+              <p class="text-left">${Math.round(forecastDay.temp.min)}°</p>
             </div>
           </div>
         </div>`;
+    }
   });
   forecastHTML = forecastHTML + `</div>`;
   forecastElement.innerHTML = forecastHTML;
 }
+
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+
+function formatDate(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let months = [
+    "Jan.",
+    "Feb.",
+    "Mar.",
+    "Apr.",
+    "May",
+    "June",
+    "July",
+    "Aug.",
+    "Sep.",
+    "Oct.",
+    "Nov.",
+    "Dec.",
+  ];
+
+  let forecastFullDate = `${months[date.getMonth()]} ${(
+    "0" + date.getDate()
+  ).slice(-2)}`;
+  return forecastFullDate;
+}
+
 // main
 let buttonSearch = document.querySelector("#search");
 buttonSearch.addEventListener("submit", city);
@@ -178,5 +213,3 @@ let apiKey = "372cf7f5c9fb1d5f2a2fd40eaffee0eb";
 let unit = "metric";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=${unit}&appid=${apiKey}`;
 axios.get(apiUrl, { validateStatus: false }).then(weatherCity);
-
-displayForecast();
