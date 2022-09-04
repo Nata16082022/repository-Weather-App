@@ -133,9 +133,9 @@ function getForecast(coordinates) {
   axios.get(apiUrl, { validateStatus: false }).then(displayForecast);
 }
 
-function displayForecast(responce) {
-  console.log(responce);
-  let forecastdays = responce.data.daily;
+function displayForecast(response) {
+  console.log(response);
+  let forecastdays = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   forecastdays.forEach(function (forecastDay, index) {
@@ -154,7 +154,7 @@ function displayForecast(responce) {
               <p class="right-text">${Math.round(forecastDay.temp.max)}°</p>
             </div>
             <div class="col-6 pl-2">
-              <p class="text-left">${Math.round(forecastDay.temp.min)}°</p>
+              <p class="left-text">${Math.round(forecastDay.temp.min)}°</p>
             </div>
           </div>
         </div>`;
