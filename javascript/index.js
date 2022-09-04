@@ -75,6 +75,7 @@ function weatherCity(response) {
   } else {
     alert("Enter, please, the correct country or city");
   }
+  getForecast(response.data.coord);
 }
 
 // city
@@ -86,7 +87,7 @@ function city(event) {
     alert(`Enter, please, country or city`);
     return false;
   }
-  let apiKey = "e503772def8edfa5152e184c6e0d5a99";
+  let apiKey = "372cf7f5c9fb1d5f2a2fd40eaffee0eb";
   let unit = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${citySearch.value}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl, { validateStatus: false }).then(weatherCity);
@@ -96,7 +97,7 @@ function city(event) {
 function showPosition(position) {
   let latitude = position.coords.latitude;
   let longitude = position.coords.longitude;
-  let apiKey = "e503772def8edfa5152e184c6e0d5a99";
+  let apiKey = "372cf7f5c9fb1d5f2a2fd40eaffee0eb";
   let unit = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl).then(weatherCity);
@@ -124,7 +125,16 @@ function celsius(event) {
   fahrenheitLink.classList.remove("active");
 }
 
-function displayForecast() {
+function getForecast(coordinates) {
+  console.log(coordinates);
+  let apiKey = "718711be868da73c54a132b5ddbcceb2";
+  let unit = "metric";
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=${unit}&appid=4b7297e82ecb214c50b2cf7c07f2f3f4`;
+  https: axios.get(apiUrl, { validateStatus: false }).then(displayForecast);
+}
+
+function displayForecast(responce) {
+  //console.log(responce);
   let forecastElement = document.querySelector("#forecast");
   let forecastHTML = `<div class="row">`;
   let days = ["Mon", "Tue", "Wed", "Thu", "Fri"];
@@ -164,8 +174,9 @@ fahrenheitLink.addEventListener("click", fahrenheit);
 let celsiustLink = document.querySelector("#celsius-link");
 celsiustLink.addEventListener("click", celsius);
 
-let apiKey = "e503772def8edfa5152e184c6e0d5a99";
+let apiKey = "372cf7f5c9fb1d5f2a2fd40eaffee0eb";
 let unit = "metric";
 let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=Paris&units=${unit}&appid=${apiKey}`;
 axios.get(apiUrl, { validateStatus: false }).then(weatherCity);
+
 displayForecast();
