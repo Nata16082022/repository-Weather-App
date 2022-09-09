@@ -127,8 +127,8 @@ function celsius(event) {
 
 // forecast
 function getForecast(coordinates) {
-  //let apiKey = "4b7297e82ecb214c50b2cf7c07f2f3f4";
-  let apiKey = "c95d60a1e3adbeb286133f1ebebc2579";
+  let apiKey = "4b7297e82ecb214c50b2cf7c07f2f3f4";
+  //let apiKey = "c95d60a1e3adbeb286133f1ebebc2579";
   let unit = "metric";
   let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&units=${unit}&appid=${apiKey}`;
   axios.get(apiUrl, { validateStatus: false }).then(displayForecast);
